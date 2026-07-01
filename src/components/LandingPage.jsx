@@ -751,8 +751,12 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         .lp-cta:hover { background: #1e293b; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .lp-hero-grid { grid-template-columns: 1fr !important; }
-          .lp-preview-col { display: none !important; }
+          .lp-preview-col { justify-content: center !important; margin-top: 8px; }
+          .lp-preview-col > div { max-width: 420px !important; }
           .oc-cards-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+          .lp-preview-col > div { max-width: 100% !important; }
         }
         @media (max-width: 640px) {
           .lp-hero-section { padding: 48px 20px 40px !important; }
