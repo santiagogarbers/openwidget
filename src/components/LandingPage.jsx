@@ -772,7 +772,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         pointerEvents: 'none',
       }}>
         <div style={{
-          maxWidth: (!isMobile && scrolled) ? 1180 : 1280,
+          maxWidth: (!isMobile && scrolled) ? 1340 : 1440,
           margin: '0 auto',
           height: isMobile ? 56 : (scrolled ? 56 : 64),
           display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 40,
