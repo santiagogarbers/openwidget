@@ -857,7 +857,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               letterSpacing: '-0.035em',
               animation: `lp-fade-up 0.6s ${EASING} 0.18s both`,
             }}>
-              El widget de chat que tus clientes merecen
+              Tu canal directo con las empresas
             </h1>
 
             {/* Subtitle */}
@@ -869,7 +869,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               maxWidth: 400,
               animation: `lp-fade-up 0.55s ${EASING} 0.29s both`,
             }}>
-              IA, voz, handoff humano y help center — todo integrado en un solo widget. Probalo con las empresas que ya lo usan.
+              Buscá la empresa, iniciá una conversación y hacé el seguimiento de tus consultas y reclamos.
             </p>
 
             {/* CTA row */}
@@ -878,7 +878,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 className="lp-cta"
                 onClick={() => companiesRef.current?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Ver asistentes
+                Ver empresas
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
                   <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -895,7 +895,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 onMouseEnter={e => { e.currentTarget.style.borderColor = '#94a3b8'; e.currentTarget.style.background = '#f8fafc' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.background = '#fff' }}
               >
-                Quiero integrarlo
+                Cómo funciona
               </button>
             </div>
 
