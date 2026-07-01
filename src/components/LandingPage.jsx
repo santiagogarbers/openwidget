@@ -969,47 +969,48 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             <div style={{
               position: 'relative',
               width: '100%',
-              maxWidth: 780,
               animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
-              paddingBottom: isMobile ? 0 : 40,
             }}>
-              {/* Desktop mockup — base */}
-              <img
-                src="/opendesk.png"
-                alt="OpenWidget desktop"
-                style={{
-                  display: 'block',
-                  borderRadius: 14,
-                  boxShadow: '0 24px 64px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06)',
-                  marginLeft: isMobile ? 0 : '8%',
-                  width: isMobile ? '100%' : '92%',
-                }}
-              />
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
 
-              {/* Mobile mockup — floating front-left */}
-              {!isMobile && (
+                {/* Mobile — izquierda */}
+                {!isMobile && (
+                  <img
+                    src="/openmobile.png"
+                    alt="OpenWidget mobile"
+                    style={{
+                      width: '27%',
+                      flexShrink: 0,
+                      display: 'block',
+                      position: 'relative',
+                      zIndex: 2,
+                      animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
+                    }}
+                  />
+                )}
+
+                {/* Desktop — derecha, leve overlap */}
                 <img
-                  src="/openmobile.png"
-                  alt="OpenWidget mobile"
+                  src="/opendesk.png"
+                  alt="OpenWidget desktop"
                   style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '26%',
+                    width: isMobile ? '100%' : '82%',
                     display: 'block',
-                    borderRadius: 24,
-                    boxShadow: '0 32px 72px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.08)',
-                    animation: `lp-image-in 0.85s ${EASING} 0.35s both`,
+                    marginLeft: isMobile ? 0 : '-9%',
+                    flexShrink: 0,
+                    position: 'relative',
+                    zIndex: 1,
                   }}
                 />
-              )}
+              </div>
 
               {/* Bottom fade */}
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0,
-                height: '38%',
+                height: '35%',
                 background: 'linear-gradient(to bottom, transparent, #f8fafc)',
                 pointerEvents: 'none',
+                zIndex: 3,
               }} />
             </div>
           </div>
