@@ -844,7 +844,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
           }}
         >
           {/* Left: text */}
-          <div style={isMobile ? { padding: '0 20px' } : {}}>
+          <div>
 
             {/* Headline */}
             <h1 style={{
