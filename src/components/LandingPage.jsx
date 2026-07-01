@@ -834,7 +834,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       </header>
 
       {/* ── HERO ── */}
-      <section className="lp-hero-section" style={{ background: '#f8fafc', padding: isMobile ? '48px 0 0' : '80px 32px 72px', borderBottom: '1px solid #e2e8f0', overflow: isMobile ? 'hidden' : 'visible' }}>
+      <section className="lp-hero-section" style={{ background: '#f8fafc', padding: isMobile ? '48px 0 0' : '80px 32px 72px', borderBottom: '1px solid #e2e8f0', overflow: 'hidden' }}>
         <div
           className="lp-hero-grid"
           style={{
@@ -962,56 +962,49 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
           <div
             className="lp-preview-col"
             style={{
-              display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
-              position: 'relative',
+              display: 'flex', alignItems: 'center',
+              position: 'relative', overflow: 'visible',
             }}
           >
+            {/* Wrapper más ancho que la columna — el desktop sangra a la derecha */}
             <div style={{
+              display: 'flex', alignItems: 'center', gap: 20,
+              width: 'calc(100% + 240px)',
               position: 'relative',
-              width: '100%',
               animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              {/* Mobile — izquierda, tamaño fijo */}
+              {!isMobile && (
+                <img
+                  src="/openmobile.png"
+                  alt="OpenWidget mobile"
+                  style={{
+                    width: 210, flexShrink: 0, display: 'block',
+                    animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
+                  }}
+                />
+              )}
 
-                {/* Mobile — izquierda */}
-                {!isMobile && (
-                  <img
-                    src="/openmobile.png"
-                    alt="OpenWidget mobile"
-                    style={{
-                      width: '27%',
-                      flexShrink: 0,
-                      display: 'block',
-                      position: 'relative',
-                      zIndex: 2,
-                      animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
-                    }}
-                  />
-                )}
-
-                {/* Desktop — derecha, leve overlap */}
+              {/* Desktop — derecha, sangra por overflow: hidden del section */}
+              <div style={{ flex: 1, position: 'relative', minWidth: 0 }}>
                 <img
                   src="/opendesk.png"
                   alt="OpenWidget desktop"
-                  style={{
-                    width: isMobile ? '100%' : '82%',
-                    display: 'block',
-                    marginLeft: isMobile ? 0 : '-9%',
-                    flexShrink: 0,
-                    position: 'relative',
-                    zIndex: 1,
-                  }}
+                  style={{ width: '100%', display: 'block' }}
                 />
+                {/* Fade derecho — oculta el corte */}
+                <div style={{
+                  position: 'absolute', top: 0, right: 0, bottom: 0, width: '22%',
+                  background: 'linear-gradient(to right, transparent, #f8fafc)',
+                  pointerEvents: 'none',
+                }} />
+                {/* Fade inferior */}
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
+                  background: 'linear-gradient(to bottom, transparent, #f8fafc)',
+                  pointerEvents: 'none',
+                }} />
               </div>
-
-              {/* Bottom fade */}
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0,
-                height: '35%',
-                background: 'linear-gradient(to bottom, transparent, #f8fafc)',
-                pointerEvents: 'none',
-                zIndex: 3,
-              }} />
             </div>
           </div>
         </div>
