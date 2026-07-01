@@ -967,15 +967,14 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             }}
           >
             <div style={{ position: 'relative', width: '100%', maxWidth: 780, animation: `lp-image-in 0.7s ${EASING} 0.15s both` }}>
-              <video
-                src="/hero-demo.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
+              <img
+                src="/hero-widget.png"
+                alt="Open Widget en acción"
                 style={{
                   width: '100%',
                   borderRadius: 16,
+                  boxShadow: 'none',
+                  border: 'none',
                   display: 'block',
                 }}
               />
