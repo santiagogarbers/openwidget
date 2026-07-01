@@ -751,8 +751,8 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         .lp-cta:hover { background: #1e293b; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .lp-hero-grid { grid-template-columns: 1fr !important; }
-          .lp-preview-col { overflow: visible !important; margin-left: -40px !important; margin-right: -40px !important; }
-          .lp-preview-col > div { max-width: none !important; width: calc(100vw + 80px) !important; }
+          .lp-preview-col { overflow: visible !important; margin-left: -80px !important; margin-right: -80px !important; }
+          .lp-preview-col > div { max-width: none !important; width: calc(100vw + 160px) !important; }
           .oc-cards-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
