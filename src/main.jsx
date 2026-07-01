@@ -1,5 +1,6 @@
 import { StrictMode, useState, useRef, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
+import { createPortal } from 'react-dom'
 import { DesktopWidget } from './components/DesktopWidget'
 import { ChatWidget } from './components/ChatWidget'
 import { LandingPage } from './components/LandingPage'
@@ -133,11 +134,11 @@ function LoginModal({ client: clientProp, onLogin, onClose }) {
     setOtpKey(k => k + 1)
   }
 
-  return (
+  return createPortal(
     <div
       onClick={onClose}
       style={{
-        position: 'fixed', inset: 0, zIndex: 2000,
+        position: 'fixed', inset: 0, zIndex: 9999,
         background: 'rgba(15,23,42,0.5)',
         backdropFilter: 'blur(4px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -288,7 +289,8 @@ function LoginModal({ client: clientProp, onLogin, onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
@@ -457,7 +459,7 @@ function ProfileModal({ onClose }) {
     </div>
   )
 
-  return (
+  return createPortal(
     <div
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
       style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', zIndex: 9999, display: 'flex', alignItems: isMobile ? 'flex-end' : 'center', justifyContent: 'center', padding: isMobile ? 0 : 20 }}
@@ -534,7 +536,8 @@ function ProfileModal({ onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
