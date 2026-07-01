@@ -963,16 +963,34 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             className="lp-preview-col"
             style={{
               display: 'flex', alignItems: 'center',
+              justifyContent: isMobile ? 'center' : 'flex-start',
               position: 'relative', overflow: 'visible',
             }}
           >
-            {/* Las imágenes tienen height fija — el desktop sangra naturalmente a la derecha */}
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 20,
-              animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
-            }}>
-              {/* Mobile — izquierda, misma altura que desktop */}
-              {!isMobile && (
+            {isMobile ? (
+              /* ── MOBILE: solo el phone mockup centrado ── */
+              <div style={{
+                position: 'relative',
+                width: '72%',
+                animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
+              }}>
+                <img
+                  src="/openmobile.png"
+                  alt="OpenWidget mobile"
+                  style={{ width: '100%', display: 'block' }}
+                />
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%',
+                  background: 'linear-gradient(to bottom, transparent, #f8fafc)',
+                  pointerEvents: 'none',
+                }} />
+              </div>
+            ) : (
+              /* ── DESKTOP: phone izq + desktop sangra derecha ── */
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 20,
+                animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
+              }}>
                 <img
                   src="/openmobile.png"
                   alt="OpenWidget mobile"
@@ -981,29 +999,25 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                     animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
                   }}
                 />
-              )}
-
-              {/* Desktop — derecha, misma altura, sangra por overflow: hidden del section */}
-              <div style={{ position: 'relative', flexShrink: 0 }}>
-                <img
-                  src="/opendesk.png"
-                  alt="OpenWidget desktop"
-                  style={{ height: isMobile ? 'auto' : 380, width: isMobile ? '100%' : 'auto', display: 'block' }}
-                />
-                {/* Fade derecho — oculta el corte */}
-                <div style={{
-                  position: 'absolute', top: 0, right: 0, bottom: 0, width: '22%',
-                  background: 'linear-gradient(to right, transparent, #f8fafc)',
-                  pointerEvents: 'none',
-                }} />
-                {/* Fade inferior */}
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
-                  background: 'linear-gradient(to bottom, transparent, #f8fafc)',
-                  pointerEvents: 'none',
-                }} />
+                <div style={{ position: 'relative', flexShrink: 0 }}>
+                  <img
+                    src="/opendesk.png"
+                    alt="OpenWidget desktop"
+                    style={{ height: 380, width: 'auto', display: 'block' }}
+                  />
+                  <div style={{
+                    position: 'absolute', top: 0, right: 0, bottom: 0, width: '22%',
+                    background: 'linear-gradient(to right, transparent, #f8fafc)',
+                    pointerEvents: 'none',
+                  }} />
+                  <div style={{
+                    position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
+                    background: 'linear-gradient(to bottom, transparent, #f8fafc)',
+                    pointerEvents: 'none',
+                  }} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
