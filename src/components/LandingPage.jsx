@@ -966,11 +966,9 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               position: 'relative', overflow: 'visible',
             }}
           >
-            {/* Wrapper más ancho que la columna — el desktop sangra a la derecha */}
+            {/* Las imágenes tienen height fija — el desktop sangra naturalmente a la derecha */}
             <div style={{
               display: 'flex', alignItems: 'center', gap: 20,
-              width: 'calc(100% + 240px)',
-              position: 'relative',
               animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
             }}>
               {/* Mobile — izquierda, misma altura que desktop */}
