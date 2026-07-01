@@ -757,6 +757,8 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         }
         @media (max-width: 640px) {
           .lp-hero-section { padding: 48px 20px 40px !important; }
+          .lp-preview-col { margin-left: 0 !important; margin-right: 0 !important; justify-content: center !important; }
+          .lp-preview-col > div { width: auto !important; }
         }
       `}</style>
 
