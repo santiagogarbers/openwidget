@@ -39,7 +39,7 @@ const ARTICLE_RESPONSES = {
   'ch-3': 'Para integrar el Webchat en tu sitio solo necesitás copiar un snippet de JavaScript generado desde tu cuenta de Botmaker y pegarlo antes del cierre del tag </body>.',
 }
 
-export function DesktopWidget({ onClose, config: configOverrides = {}, topInset = 0, loggedInUser = null, onLogout, onOpenProfile }) {
+export function DesktopWidget({ onClose, config: configOverrides = {}, topInset = 0, loggedInUser = null, onLogout, onOpenProfile, onOpenLogin }) {
   const config = useConfig(configOverrides)
   const { logFallback } = useFallbackLog(config.fallbackLogEndpoint)
 
@@ -326,7 +326,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, topInset 
     onSelectActive: () => { setSelectedSession(null); if (isMobile) setSessionsOpen(false) },
     onSelectPast: (s) => { setSelectedSession(s); if (isMobile) setSessionsOpen(false) },
     loggedInUser,
-    onLogin: () => {},
+    onLogin: onOpenLogin,
     onLogout,
     onOpenProfile,
   }
@@ -799,18 +799,36 @@ function DWSessionsPanel({ activeName, activeTitle, activeAvatar, activeIsAgent,
 
       {/* User footer — Slack-style */}
       <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 10px', flexShrink: 0, position: 'relative' }}>
-        <button
-          onClick={() => setUserMenuOpen(o => !o)}
-          style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', padding: '7px 8px', background: 'transparent', border: 'none', borderRadius: 10, cursor: 'pointer', transition: 'background 120ms', fontFamily: 'var(--cw-font-family)' }}
-          onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
-          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-        >
-          <img src="/avatar-santiago.jpg" alt="Santiago" style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-          <span style={{ flex: 1, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#111827', fontFamily: 'var(--cw-font-family)' }}>Santiago</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style={{ color: '#9ca3af', flexShrink: 0 }}>
-            <path d="M6 9l6-6 6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        {!loggedInUser ? (
+          <button
+            onClick={() => onLogin?.()}
+            style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', padding: '9px 12px', background: 'transparent', border: 'none', borderRadius: 10, cursor: 'pointer', transition: 'background 120ms', fontFamily: 'var(--cw-font-family)' }}
+            onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+          >
+            <div style={{ width: 30, height: 30, borderRadius: '50%', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="10 17 15 12 10 7" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <line x1="15" y1="12" x2="3" y2="12" stroke="#6b7280" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <span style={{ flex: 1, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#374151', fontFamily: 'var(--cw-font-family)' }}>Ingresar</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => setUserMenuOpen(o => !o)}
+            style={{ display: 'flex', alignItems: 'center', gap: 9, width: '100%', padding: '7px 8px', background: 'transparent', border: 'none', borderRadius: 10, cursor: 'pointer', transition: 'background 120ms', fontFamily: 'var(--cw-font-family)' }}
+            onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+          >
+            <img src="/avatar-santiago.jpg" alt="Santiago" style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+            <span style={{ flex: 1, textAlign: 'left', fontSize: 13, fontWeight: 600, color: '#111827', fontFamily: 'var(--cw-font-family)' }}>Santiago</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style={{ color: '#9ca3af', flexShrink: 0 }}>
+              <path d="M6 9l6-6 6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        )}
 
         {userMenuOpen && <div onClick={() => setUserMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 0 }} />}
         {userMenuOpen && (

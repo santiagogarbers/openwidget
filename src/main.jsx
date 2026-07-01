@@ -613,6 +613,7 @@ function App() {
           loggedInUser={loggedInUser}
           onLogout={handleLogout}
           onOpenProfile={() => setProfileOpen(true)}
+          onOpenLogin={() => setLoginOpen(true)}
         />
       )}
       {showSpinner && <DesktopSpinner fading={view === 'transitioning'} />}
