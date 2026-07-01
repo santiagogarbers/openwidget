@@ -977,7 +977,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                   src="/openmobile.png"
                   alt="OpenWidget mobile"
                   style={{
-                    height: 460, width: 'auto', flexShrink: 0, display: 'block',
+                    height: 380, width: 'auto', flexShrink: 0, display: 'block',
                     animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
                   }}
                 />
@@ -988,7 +988,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 <img
                   src="/opendesk.png"
                   alt="OpenWidget desktop"
-                  style={{ height: isMobile ? 'auto' : 460, width: isMobile ? '100%' : 'auto', display: 'block' }}
+                  style={{ height: isMobile ? 'auto' : 380, width: isMobile ? '100%' : 'auto', display: 'block' }}
                 />
                 {/* Fade derecho — oculta el corte */}
                 <div style={{
