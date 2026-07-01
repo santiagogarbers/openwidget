@@ -973,14 +973,14 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               /* ── MOBILE: solo el phone mockup centrado ── */
               <div style={{
                 position: 'relative',
-                height: 280,
+                height: 340,
                 overflow: 'hidden',
                 animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
               }}>
                 <img
                   src="/openmobile.png"
                   alt="OpenWidget mobile"
-                  style={{ height: 500, width: 'auto', display: 'block' }}
+                  style={{ height: 620, width: 'auto', display: 'block' }}
                 />
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
