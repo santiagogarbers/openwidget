@@ -834,7 +834,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       </header>
 
       {/* ── HERO ── */}
-      <section className="lp-hero-section" style={{ background: '#fff', padding: isMobile ? '48px 0 0' : '80px 32px 72px', borderBottom: '1px solid #f1f5f9', overflow: isMobile ? 'hidden' : 'visible' }}>
+      <section className="lp-hero-section" style={{ background: '#f8fafc', padding: isMobile ? '48px 0 0' : '80px 32px 72px', borderBottom: '1px solid #e2e8f0', overflow: isMobile ? 'hidden' : 'visible' }}>
         <div
           className="lp-hero-grid"
           style={{
@@ -982,7 +982,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 position: 'absolute', bottom: 0, left: 0, right: 0,
                 height: '35%',
                 borderRadius: '0 0 16px 16px',
-                background: 'linear-gradient(to bottom, transparent, #ffffff)',
+                background: 'linear-gradient(to bottom, transparent, #f8fafc)',
                 pointerEvents: 'none',
               }} />
             </div>
