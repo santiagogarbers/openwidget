@@ -751,12 +751,9 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         .lp-cta:hover { background: #1e293b; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .lp-hero-grid { grid-template-columns: 1fr !important; }
-          .lp-preview-col { justify-content: center !important; margin-top: 8px; }
-          .lp-preview-col > div { max-width: 420px !important; }
+          .lp-preview-col { overflow: visible !important; margin-left: 20px !important; }
+          .lp-preview-col > div { max-width: none !important; width: calc(100vw - 20px) !important; }
           .oc-cards-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 480px) {
-          .lp-preview-col > div { max-width: 100% !important; }
         }
         @media (max-width: 640px) {
           .lp-hero-section { padding: 48px 20px 40px !important; }
@@ -837,7 +834,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       </header>
 
       {/* ── HERO ── */}
-      <section className="lp-hero-section" style={{ background: '#fff', padding: '80px 32px 72px', borderBottom: '1px solid #f1f5f9' }}>
+      <section className="lp-hero-section" style={{ background: '#fff', padding: isMobile ? '48px 0 0' : '80px 32px 72px', borderBottom: '1px solid #f1f5f9', overflow: isMobile ? 'hidden' : 'visible' }}>
         <div
           className="lp-hero-grid"
           style={{
@@ -847,7 +844,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
           }}
         >
           {/* Left: text */}
-          <div>
+          <div style={isMobile ? { padding: '0 20px' } : {}}>
 
             {/* Headline */}
             <h1 style={{
@@ -996,19 +993,31 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       <section style={{
         background: '#f8fafc',
         borderBottom: '1px solid #e2e8f0',
-        padding: '20px 32px',
+        padding: isMobile ? '16px 0' : '20px 32px',
         animation: `lp-fade-in 0.6s ${EASING} 0.62s both`,
+        overflow: 'hidden',
       }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 32, flexWrap: 'wrap', padding: '0 32px' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', whiteSpace: 'nowrap', flexShrink: 0 }}>
-            USADO POR
-          </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 28, flexWrap: 'wrap', flex: 1 }}>
-            {showcaseClients.map(client => (
-              <LogoItem key={client.id} client={client} />
-            ))}
+        {isMobile ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', paddingLeft: 20 }}>USADO POR</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 24, overflowX: 'auto', paddingLeft: 20, paddingRight: 20, scrollbarWidth: 'none' }}>
+              {showcaseClients.map(client => (
+                <LogoItem key={client.id} client={client} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 32, padding: '0 32px' }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', whiteSpace: 'nowrap', flexShrink: 0 }}>
+              USADO POR
+            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 28, flex: 1, flexWrap: 'wrap' }}>
+              {showcaseClients.map(client => (
+                <LogoItem key={client.id} client={client} />
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ── COMPANIES SECTION ── */}
