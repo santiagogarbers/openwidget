@@ -544,7 +544,6 @@ function ProfileModal({ onClose }) {
 function App() {
   const [view, setView] = useState('landing')
   const [activeClient, setActiveClient] = useState(null)
-  const [pendingClient, setPendingClient] = useState(null)
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [profileOpen, setProfileOpen] = useState(false)
   const [loginOpen, setLoginOpen] = useState(false)
@@ -552,13 +551,6 @@ function App() {
   const [widgetKey, setWidgetKey] = useState(0)
 
   const handleSelectClient = (client) => {
-    setPendingClient(client)
-  }
-
-  const handleLogin = (user) => {
-    const client = pendingClient
-    setLoggedInUser(user)
-    setPendingClient(null)
     setActiveClient(client)
     setView('loading')
     setTimeout(() => {
@@ -619,13 +611,6 @@ function App() {
       {showSpinner && <DesktopSpinner fading={view === 'transitioning'} />}
       {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} />}
       {loginOpen && <LoginModal client={null} onLogin={handleHeaderLogin} onClose={() => setLoginOpen(false)} />}
-      {pendingClient && (
-        <LoginModal
-          client={pendingClient}
-          onLogin={handleLogin}
-          onClose={() => setPendingClient(null)}
-        />
-      )}
     </>
   )
 }
