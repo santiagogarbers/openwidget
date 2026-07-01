@@ -757,7 +757,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         }
         @media (max-width: 640px) {
           .lp-hero-section { padding: 48px 20px 40px !important; }
-          .lp-preview-col { margin-left: 0 !important; margin-right: 0 !important; justify-content: center !important; }
+          .lp-preview-col { margin-left: 0 !important; margin-right: 0 !important; justify-content: center !important; order: -1; }
           .lp-preview-col > div { width: auto !important; }
         }
       `}</style>
@@ -973,6 +973,8 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               /* ── MOBILE: solo el phone mockup centrado ── */
               <div style={{
                 position: 'relative',
+                height: 280,
+                overflow: 'hidden',
                 animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
               }}>
                 <img
@@ -981,7 +983,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                   style={{ height: 500, width: 'auto', display: 'block' }}
                 />
                 <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%',
+                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
                   background: 'linear-gradient(to bottom, transparent, #f8fafc)',
                   pointerEvents: 'none',
                 }} />
