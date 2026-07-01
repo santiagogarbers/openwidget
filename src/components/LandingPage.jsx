@@ -971,7 +971,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               /* ── MOBILE: solo el phone mockup centrado ── */
               <div style={{
                 position: 'relative',
-                width: '72%',
+                width: '52%',
                 animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
               }}>
                 <img
