@@ -764,7 +764,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       <header style={{
         position: 'sticky', top: 0, zIndex: 100,
         padding: (!isMobile && scrolled) ? '10px 24px' : '0',
-        background: isMobile ? 'rgba(255,255,255,0.88)' : (scrolled ? 'transparent' : 'rgba(255,255,255,0.97)'),
+        background: isMobile ? 'rgba(248,250,252,0.92)' : (scrolled ? 'transparent' : 'rgba(248,250,252,0.97)'),
         transition: `background 0.4s, padding 0.45s ${EASING}`,
         animation: `lp-slide-down 0.5s ${EASING} both`,
         pointerEvents: 'none',
@@ -776,7 +776,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
           display: 'flex', alignItems: 'center', gap: isMobile ? 0 : 40,
           padding: isMobile ? '0 16px' : (scrolled ? '0 20px' : '0 32px'),
           borderRadius: (!isMobile && scrolled) ? 999 : 0,
-          background: isMobile ? 'transparent' : (scrolled ? 'rgba(255,255,255,0.82)' : 'transparent'),
+          background: isMobile ? 'transparent' : (scrolled ? 'rgba(248,250,252,0.88)' : 'transparent'),
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: (!isMobile && scrolled)
