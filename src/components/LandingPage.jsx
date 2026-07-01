@@ -978,7 +978,6 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 src="/opendesk.png"
                 alt="OpenWidget desktop"
                 style={{
-                  width: '100%',
                   display: 'block',
                   borderRadius: 14,
                   boxShadow: '0 24px 64px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06)',
