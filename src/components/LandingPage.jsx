@@ -853,6 +853,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               color: '#0f172a',
               margin: '0 0 16px',
               lineHeight: 1.1,
+              maxWidth: isMobile ? '80%' : 'none',
               letterSpacing: '-0.035em',
               animation: `lp-fade-up 0.6s ${EASING} 0.18s both`,
             }}>
