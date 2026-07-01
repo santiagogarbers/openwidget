@@ -840,7 +840,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         <div
           className="lp-hero-grid"
           style={{
-            maxWidth: 1480, margin: '0 auto',
+            maxWidth: 1440, margin: '0 auto',
             display: 'grid', gridTemplateColumns: '1fr 1.7fr',
             gap: 48, alignItems: 'center',
           }}
@@ -1043,7 +1043,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             </div>
           </div>
         ) : (
-          <div style={{ maxWidth: 1480, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 32, padding: '0 32px' }}>
+          <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 32, padding: '0 32px' }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.07em', whiteSpace: 'nowrap', flexShrink: 0 }}>
               USADO POR
             </span>
@@ -1057,7 +1057,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
       </section>
 
       {/* ── COMPANIES SECTION ── */}
-      <div ref={companiesRef} style={{ maxWidth: 1480, margin: '0 auto', padding: '52px 32px 80px' }}>
+      <div ref={companiesRef} style={{ maxWidth: 1440, margin: '0 auto', padding: '52px 32px 80px' }}>
         {/* Section header */}
         <div style={{ marginBottom: 32, ...(cardsInView ? { animation: `lp-fade-up 0.55s ${EASING} both` } : { opacity: 0 }) }}>
           <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0f172a', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
