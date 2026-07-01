@@ -894,13 +894,25 @@ function DWInfoPanel({ onClose, name, avatar, isAgent, subtitle, messages, confi
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: isMobile ? '16px 18px' : '14px 16px', borderBottom: '1px solid #f3f4f6', flexShrink: 0 }}>
-          <button
-            onClick={onClose}
-            style={{ width: 32, height: 32, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6b7280', borderRadius: '50%', flexShrink: 0 }}
-          >
-            <BackIcon />
-          </button>
-          <span style={{ fontSize: 16, fontWeight: 700, color: '#111827' }}>Info. del contacto</span>
+          {isMobile && (
+            <button
+              onClick={onClose}
+              style={{ width: 32, height: 32, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6b7280', borderRadius: '50%', flexShrink: 0 }}
+            >
+              <BackIcon />
+            </button>
+          )}
+          <span style={{ fontSize: 16, fontWeight: 700, color: '#111827', flex: 1 }}>Info. del contacto</span>
+          {!isMobile && (
+            <button
+              onClick={onClose}
+              style={{ width: 32, height: 32, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6b7280', borderRadius: '50%', flexShrink: 0, transition: 'background 120ms' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+            >
+              <CloseIconSmall />
+            </button>
+          )}
         </div>
 
         {/* Profile */}
