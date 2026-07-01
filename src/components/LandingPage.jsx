@@ -973,24 +973,24 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               position: 'relative',
               animation: `lp-image-in 0.7s ${EASING} 0.15s both`,
             }}>
-              {/* Mobile — izquierda, tamaño fijo */}
+              {/* Mobile — izquierda, misma altura que desktop */}
               {!isMobile && (
                 <img
                   src="/openmobile.png"
                   alt="OpenWidget mobile"
                   style={{
-                    width: 210, flexShrink: 0, display: 'block',
+                    height: 460, width: 'auto', flexShrink: 0, display: 'block',
                     animation: `lp-image-in 0.85s ${EASING} 0.3s both`,
                   }}
                 />
               )}
 
-              {/* Desktop — derecha, sangra por overflow: hidden del section */}
-              <div style={{ flex: 1, position: 'relative', minWidth: 0 }}>
+              {/* Desktop — derecha, misma altura, sangra por overflow: hidden del section */}
+              <div style={{ position: 'relative', flexShrink: 0 }}>
                 <img
                   src="/opendesk.png"
                   alt="OpenWidget desktop"
-                  style={{ width: '100%', display: 'block' }}
+                  style={{ height: isMobile ? 'auto' : 460, width: isMobile ? '100%' : 'auto', display: 'block' }}
                 />
                 {/* Fade derecho — oculta el corte */}
                 <div style={{
