@@ -164,12 +164,12 @@ function LoginModal({ client: clientProp, onLogin, onClose }) {
               </div>
           }
           <h2 style={{ fontSize: 17, fontWeight: 700, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>
-            {step === 'phone-verify' ? 'Ingresá el código' : 'Identificate para continuar'}
+            {step === 'phone-verify' ? 'Ingresá el código' : `Identificate para continuar con ${client.name}`}
           </h2>
           <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
             {step === 'phone-verify'
               ? <>Te enviamos un SMS al <strong style={{ color: '#0f172a' }}>+54 {phone}</strong></>
-              : <>Para chatear con {client.name} necesitamos saber quién sos.</>
+              : <>Necesitamos saber quién sos para iniciar la conversación.</>
             }
           </p>
         </div>
@@ -610,7 +610,7 @@ function App() {
       )}
       {showSpinner && <DesktopSpinner fading={view === 'transitioning'} />}
       {profileOpen && <ProfileModal onClose={() => setProfileOpen(false)} />}
-      {loginOpen && <LoginModal client={null} onLogin={handleHeaderLogin} onClose={() => setLoginOpen(false)} />}
+      {loginOpen && <LoginModal client={activeClient} onLogin={handleHeaderLogin} onClose={() => setLoginOpen(false)} />}
     </>
   )
 }
