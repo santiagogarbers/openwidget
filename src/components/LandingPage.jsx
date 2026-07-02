@@ -742,13 +742,13 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
         }
         .lp-cta {
           display: inline-flex; align-items: center; gap: 8px;
-          background: #0f172a; color: #fff;
+          background: #f59e0b; color: #0f172a;
           border: none; border-radius: 12px;
           padding: 11px 20px; font-size: 14px; font-weight: 700;
           cursor: pointer; font-family: inherit;
           transition: background 150ms, transform 150ms;
         }
-        .lp-cta:hover { background: #1e293b; transform: translateY(-1px); }
+        .lp-cta:hover { background: #d97706; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .lp-hero-grid { grid-template-columns: 1fr !important; }
           .lp-preview-col { overflow: visible !important; margin-left: -80px !important; margin-right: -80px !important; }
