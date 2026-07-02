@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import '../styles/global.css'
 import { useConfig } from '../hooks/useConfig'
+import { LoginContent } from './LoginContent'
 import { useFallbackLog } from '../hooks/useFallbackLog'
 import { MessageList, Lightbox } from './MessageList'
 import { ChatInput } from './ChatInput'
@@ -39,7 +40,7 @@ const ARTICLE_RESPONSES = {
   'ch-3': 'Para integrar el Webchat en tu sitio solo necesitás copiar un snippet de JavaScript generado desde tu cuenta de Botmaker y pegarlo antes del cierre del tag </body>.',
 }
 
-export function DesktopWidget({ onClose, config: configOverrides = {}, topInset = 0, loggedInUser = null, onLogout, onOpenProfile, onOpenLogin }) {
+export function DesktopWidget({ onClose, config: configOverrides = {}, clientName, clientLogo, topInset = 0, loggedInUser = null, onLogin, onLogout, onOpenProfile, onOpenLogin }) {
   const config = useConfig(configOverrides)
   const { logFallback } = useFallbackLog(config.fallbackLogEndpoint)
 
@@ -440,7 +441,16 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, topInset 
             </div>
           </div>
 
-          {/* Messages */}
+          {/* Login screen — shown when not authenticated */}
+          {!loggedInUser && (
+            <LoginContent
+              client={{ name: clientName ?? config.botName, logo: clientLogo ?? config.clientLogo ?? null, primaryColor: config.primaryColor }}
+              onLogin={onLogin}
+            />
+          )}
+
+          {/* Messages + Input + Calls — only when authenticated */}
+          {loggedInUser && (<>
           <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', ...WA_BG_STYLE, position: 'relative' }}>
             <MessageList
               messages={displayMessages}
@@ -545,6 +555,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, topInset 
               />
             </div>
           )}
+          </>)}
         </div>
 
         {/* ── Info panel ── */}
