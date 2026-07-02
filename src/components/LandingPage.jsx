@@ -859,7 +859,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               letterSpacing: '-0.035em',
               animation: `lp-fade-up 0.6s ${EASING} 0.18s both`,
             }}>
-              Tu canal directo con las empresas
+              Central de atención a clientes
             </h1>
 
             {/* Subtitle */}
