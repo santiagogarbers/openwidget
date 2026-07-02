@@ -164,13 +164,13 @@ export function LoginContent({ client, onLogin }) {
               <span style={{ color: '#fff', fontWeight: 800, fontSize: 20 }}>{name[0]}</span>
             </div>
         }
-        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>
-          {step === 'phone-verify' ? 'Ingresá el código' : `Identificate para continuar con ${name}`}
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
+          {step === 'phone-verify' ? 'Ingresá el código' : `Bienvenido a la atención al cliente de ${name}`}
         </h2>
         <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
           {step === 'phone-verify'
             ? <>Te enviamos un SMS al <strong style={{ color: '#0f172a' }}>+54 {phone}</strong></>
-            : <>Necesitamos saber quién sos para iniciar la conversación.</>
+            : <>Por favor iniciá sesión para conversar con {name}.</>
           }
         </p>
       </div>
