@@ -809,21 +809,21 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             )}
             {!isMobile && (
               <button style={{
-                background: '#0f172a', color: '#fff',
+                background: '#f59e0b', color: '#0f172a',
                 border: 'none', borderRadius: scrolled ? 999 : 8,
                 padding: scrolled ? '7px 18px' : '8px 18px',
                 fontSize: 14, fontWeight: 600,
                 cursor: 'pointer', fontFamily: 'inherit',
                 transition: `background 120ms, border-radius 0.45s ${EASING}`,
               }}
-                onMouseEnter={e => e.currentTarget.style.background = '#1e293b'}
-                onMouseLeave={e => e.currentTarget.style.background = '#0f172a'}
+                onMouseEnter={e => e.currentTarget.style.background = '#d97706'}
+                onMouseLeave={e => e.currentTarget.style.background = '#f59e0b'}
                 onClick={() => setShowModal(true)}
               >Quiero ser parte</button>
             )}
             {isMobile && (
               <button onClick={() => setShowModal(true)} style={{
-                background: '#0f172a', color: '#fff',
+                background: '#f59e0b', color: '#0f172a',
                 border: 'none', borderRadius: 10,
                 padding: '7px 14px',
                 fontSize: 13, fontWeight: 600,
