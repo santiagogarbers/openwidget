@@ -236,6 +236,10 @@ function Message({ message, isRead, onOpenLightbox, quickReplies, onQuickReply, 
     return <AgentJoinMessage agentName={message.agentName} agentAvatar={message.agentAvatar} timestamp={message.timestamp} isMobile={isMobile} />
   }
 
+  if (message.type === 'menu') {
+    return <MenuMessage message={message} onSelect={onQuickReply} />
+  }
+
   if (message.type === 'fallback') {
     return (
       <div className="cw-msg-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
@@ -293,6 +297,63 @@ function Ticks({ read, streaming }) {
       <path d="M1 5l3.5 3.5L12 1" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M5 5l3.5 3.5L16 1" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
+  )
+}
+
+const MENU_ICONS = {
+  lightning: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#6366f1"/></svg>
+  ),
+  arrow: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+  ),
+  target: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#6366f1" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="#6366f1"/></svg>
+  ),
+  chat: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#6366f1" strokeWidth="2" strokeLinejoin="round"/></svg>
+  ),
+  star: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="#6366f1"/></svg>
+  ),
+}
+
+function MenuMessage({ message, onSelect }) {
+  return (
+    <div className="cw-msg-in" style={{ maxWidth: '88%', paddingBottom: 8 }}>
+      {message.title && (
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#111827', marginBottom: 10, paddingLeft: 2 }}>
+          {message.title}
+        </div>
+      )}
+      <div style={{ border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden', background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+        {message.items.map((item, i) => (
+          <button
+            key={item.id ?? i}
+            onClick={() => onSelect?.({ value: item.id ?? item.label, label: item.label })}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              width: '100%', padding: '13px 14px',
+              background: '#fff', border: 'none',
+              borderTop: i > 0 ? '1px solid #f3f4f6' : 'none',
+              cursor: 'pointer', textAlign: 'left',
+              fontFamily: 'var(--cw-font-family)',
+              transition: 'background 120ms',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+            onMouseLeave={e => e.currentTarget.style.background = '#fff'}
+          >
+            <div style={{ width: 32, height: 32, borderRadius: 8, background: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              {MENU_ICONS[item.icon] ?? MENU_ICONS.arrow}
+            </div>
+            <span style={{ flex: 1, fontSize: 14, fontWeight: 500, color: '#111827' }}>{item.label}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, color: '#9ca3af' }}>
+              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        ))}
+      </div>
+    </div>
   )
 }
 

@@ -207,6 +207,21 @@ export function ChatWidget({ config: configOverrides = {}, initialOpen = false, 
     const sid = activeSessionId
     addMessage(sid, { id: nextId++, role: 'user', type: attachments.length ? 'image' : 'text', text, attachments, createdAt: new Date() })
 
+    if (/botonera/i.test(text.trim())) {
+      setIsTyping(true)
+      setTypingMode('writing')
+      setTimeout(() => {
+        setIsTyping(false)
+        addMessage(sid, { id: nextId++, role: 'bot', type: 'menu', title: 'Seleccioná una opción', items: [
+          { id: 'opt1', icon: 'lightning', label: 'Ver mis pedidos' },
+          { id: 'opt2', icon: 'chat',      label: 'Hablar con un agente' },
+          { id: 'opt3', icon: 'target',    label: 'Consultar estado de envío' },
+          { id: 'opt4', icon: 'arrow',     label: 'Hacer una devolución' },
+        ], createdAt: new Date(), senderName: config.botName, senderType: 'Asistente IA' })
+      }, 1000)
+      return
+    }
+
     // Si Camila preguntó por una llamada y el usuario responde "si"
     if (agentSession && /^s[ií]$/i.test(text.trim())) {
       setTimeout(() => setIncomingCall(agentSession), 1200)

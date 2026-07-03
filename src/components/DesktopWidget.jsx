@@ -177,6 +177,21 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
       return
     }
 
+    if (/botonera/i.test(text.trim())) {
+      setIsTyping(true)
+      setTypingMode('writing')
+      setTimeout(() => {
+        setIsTyping(false)
+        addMessage({ id: nextDesktopId++, role: 'bot', type: 'menu', title: 'Seleccioná una opción', items: [
+          { id: 'opt1', icon: 'lightning', label: 'Ver mis pedidos' },
+          { id: 'opt2', icon: 'chat',      label: 'Hablar con un agente' },
+          { id: 'opt3', icon: 'target',    label: 'Consultar estado de envío' },
+          { id: 'opt4', icon: 'arrow',     label: 'Hacer una devolución' },
+        ], createdAt: new Date(), senderName: config.botName, senderType: 'Asistente IA' })
+      }, 1000)
+      return
+    }
+
     if (agentSession && /^s[ií]$/i.test(text.trim())) {
       setTimeout(() => setIncomingCall(agentSession), 1200)
       return
