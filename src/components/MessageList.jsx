@@ -586,8 +586,9 @@ const bubbleWrap = (role) => ({
 })
 
 const bubbleStyle = (isUser, isMobile = false) => ({
+  position: 'relative',
   overflow: 'hidden',
-  padding: isMobile ? '9px 16px 5px' : '7px 13px 4px',
+  padding: isMobile ? '9px 16px 22px' : '7px 13px 20px',
   borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
   background: isUser ? 'var(--cw-bg-message-user)' : 'var(--cw-bg-message-bot)',
   color: isUser ? 'var(--cw-text-message-user)' : 'var(--cw-text)',
@@ -598,16 +599,15 @@ const bubbleStyle = (isUser, isMobile = false) => ({
   boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
 })
 
-// Invisible spacer that reserves width for the meta so short text doesn't let meta overflow
 const metaStyle = (isUser, isMobile = false) => ({
-  float: 'right',
-  marginLeft: 6,
-  marginTop: isMobile ? 5 : 3,
+  position: 'absolute',
+  bottom: 4,
+  right: 8,
   display: 'flex',
   alignItems: 'center',
   gap: 3,
-  fontSize: 11,
-  color: isUser ? 'rgba(0,0,0,0.45)' : '#9ca3af',
+  fontSize: 10,
+  color: isUser ? 'rgba(255,255,255,0.75)' : '#9ca3af',
   whiteSpace: 'nowrap',
   userSelect: 'none',
   lineHeight: 1,
