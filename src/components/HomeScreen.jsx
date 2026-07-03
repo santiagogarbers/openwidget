@@ -218,11 +218,11 @@ export function HomeScreen({ onClose, isExpanded, onToggleExpand, onNewChat, onT
         <div style={heroTextStyle}>
           {loggedInUser ? (
             <h1 style={headingStyle}>
-              <span style={{ fontWeight: 300 }}>Hola {loggedInUser.name.split(' ')[0]},</span><br />¿cómo podemos ayudarte?
+              <span style={{ fontWeight: 300 }}>Hola {loggedInUser.name.split(' ')[0]},</span><br />¿Cómo podemos ayudarte?
             </h1>
           ) : (
             <h1 style={headingStyle}>
-              <span style={{ fontWeight: 300 }}>Hola,</span><br />¿cómo podemos ayudarte?
+              <span style={{ fontWeight: 300 }}>Hola,</span><br />¿Cómo podemos ayudarte?
             </h1>
           )}
         </div>
