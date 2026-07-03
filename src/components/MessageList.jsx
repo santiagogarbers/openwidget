@@ -22,10 +22,10 @@ function dayLabel(date) {
 
 const BUBBLE_ANIM = `
   @keyframes cw-msg-in {
-    from { opacity: 0; transform: translateY(7px); }
+    from { opacity: 0; transform: translateY(4px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .cw-msg-in { animation: cw-msg-in 0.2s cubic-bezier(0.25, 0.8, 0.4, 1) both; }
+  .cw-msg-in { animation: cw-msg-in 0.35s cubic-bezier(0.25, 0.8, 0.4, 1) both; }
 `
 
 export function MessageList({ messages, isTyping, typingMode, typingStates, quickReplies, onQuickReply, onEscalate, onLeaveMessage, fallbackText, agentName, isMobile = false }) {
