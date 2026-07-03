@@ -320,7 +320,7 @@ const MENU_ICONS = {
 
 function MenuMessage({ message, onSelect }) {
   return (
-    <div className="cw-msg-in" style={{ maxWidth: '88%', paddingBottom: 8 }}>
+    <div className="cw-msg-in" style={{ maxWidth: '72%', paddingBottom: 8 }}>
       {message.title && (
         <div style={{ fontSize: 13, fontWeight: 600, color: '#111827', marginBottom: 10, paddingLeft: 2 }}>
           {message.title}
@@ -333,7 +333,7 @@ function MenuMessage({ message, onSelect }) {
             onClick={() => onSelect?.({ value: item.id ?? item.label, label: item.label })}
             style={{
               display: 'flex', alignItems: 'center', gap: 12,
-              width: '100%', padding: '13px 14px',
+              width: '100%', padding: '9px 12px',
               background: '#fff', border: 'none',
               borderTop: i > 0 ? '1px solid #f3f4f6' : 'none',
               cursor: 'pointer', textAlign: 'left',
@@ -343,10 +343,10 @@ function MenuMessage({ message, onSelect }) {
             onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
             onMouseLeave={e => e.currentTarget.style.background = '#fff'}
           >
-            <div style={{ width: 32, height: 32, borderRadius: 8, background: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 26, height: 26, borderRadius: 6, background: '#eef2ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               {MENU_ICONS[item.icon] ?? MENU_ICONS.arrow}
             </div>
-            <span style={{ flex: 1, fontSize: 14, fontWeight: 500, color: '#111827' }}>{item.label}</span>
+            <span style={{ flex: 1, fontSize: 13, fontWeight: 500, color: '#111827' }}>{item.label}</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, color: '#9ca3af' }}>
               <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
