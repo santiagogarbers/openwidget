@@ -550,8 +550,8 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
           {/* Login overlay — shown when not authenticated */}
           {!loggedInUser && (
             <div style={{
-              position: 'absolute', inset: 0, zIndex: 50,
-              background: 'rgba(15,23,42,0.45)',
+              position: 'fixed', inset: 0, zIndex: 9999,
+              background: 'rgba(15,23,42,0.5)',
               backdropFilter: 'blur(6px)',
               WebkitBackdropFilter: 'blur(6px)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
