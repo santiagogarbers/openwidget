@@ -442,9 +442,6 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
                 </div>
               </div>
 
-              <button className="dw-hdr-btn" aria-label="Cerrar" onClick={onClose}>
-                <CloseIcon />
-              </button>
             </div>
           </div>
 
