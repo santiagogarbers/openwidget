@@ -20,6 +20,14 @@ function dayLabel(date) {
   return d.toLocaleDateString('es-AR', { day: 'numeric', month: 'long' })
 }
 
+const BUBBLE_ANIM = `
+  @keyframes cw-msg-in {
+    from { opacity: 0; transform: translateY(7px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .cw-msg-in { animation: cw-msg-in 0.2s cubic-bezier(0.25, 0.8, 0.4, 1) both; }
+`
+
 export function MessageList({ messages, isTyping, typingMode, typingStates, quickReplies, onQuickReply, onEscalate, onLeaveMessage, fallbackText, agentName, isMobile = false }) {
   const bottomRef = useRef(null)
   const [lightboxSrc, setLightboxSrc] = useState(null)
@@ -53,6 +61,7 @@ export function MessageList({ messages, isTyping, typingMode, typingStates, quic
 
   return (
     <div style={listStyle}>
+      <style>{BUBBLE_ANIM}</style>
       {lightboxSrc && <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />}
       {items.map(item =>
         item.kind === 'separator'
@@ -103,7 +112,7 @@ function FileMessage({ message, isMobile, onOpenLightbox }) {
   const fs     = isMobile ? 15 : 13
   const openPreview = () => onOpenLightbox && onOpenLightbox({ type: 'file', name: message.file.name, size: message.file.size })
   return (
-    <div style={bubbleWrap(message.role)}>
+    <div className="cw-msg-in" style={bubbleWrap(message.role)}>
       <div style={{ maxWidth: '78%' }}>
         <div style={{ overflow: 'hidden', padding: '8px 12px 5px', borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px', background: isUser ? 'var(--cw-bg-message-user)' : 'var(--cw-bg-message-bot)', boxShadow: '0 1px 2px rgba(0,0,0,0.08)' }}>
           {message.text && (
@@ -229,7 +238,7 @@ function Message({ message, isRead, onOpenLightbox, quickReplies, onQuickReply, 
 
   if (message.type === 'fallback') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
+      <div className="cw-msg-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
         <FallbackMessage text={fallbackText} onEscalate={onEscalate} onLeaveMessage={onLeaveMessage} acted={message.acted} isMobile={isMobile} />
         {senderName && <BubbleLabel name={senderName} type={senderType} />}
       </div>
@@ -241,7 +250,7 @@ function Message({ message, isRead, onOpenLightbox, quickReplies, onQuickReply, 
   const streaming = message.type === 'streaming'
 
   return (
-    <div>
+    <div className="cw-msg-in">
       <div style={bubbleWrap(message.role)}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', gap: 4, maxWidth: '72%' }}>
           {message.attachments?.length > 0 && (
