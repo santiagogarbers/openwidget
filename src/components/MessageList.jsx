@@ -237,7 +237,7 @@ function Message({ message, isRead, onOpenLightbox, quickReplies, onQuickReply, 
   }
 
   if (message.type === 'menu') {
-    return <MenuMessage message={message} onSelect={onQuickReply} />
+    return <MenuMessage message={message} onSelect={onQuickReply} isMobile={isMobile} />
   }
 
   if (message.type === 'fallback') {
@@ -318,9 +318,9 @@ const MENU_ICONS = {
   ),
 }
 
-function MenuMessage({ message, onSelect }) {
+function MenuMessage({ message, onSelect, isMobile = false }) {
   return (
-    <div className="cw-msg-in" style={{ maxWidth: '42%', paddingBottom: 8 }}>
+    <div className="cw-msg-in" style={{ maxWidth: isMobile ? '100%' : '42%', width: isMobile ? '100%' : undefined, paddingBottom: 8 }}>
       {message.title && (
         <div style={{ fontSize: 13, fontWeight: 600, color: '#111827', marginBottom: 10, paddingLeft: 2 }}>
           {message.title}
