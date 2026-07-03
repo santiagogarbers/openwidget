@@ -3,7 +3,7 @@ export function QuickReplies({ options, onSelect }) {
     <>
       <style>{`
         .cw-qr-btn {
-          padding: 9px 16px;
+          padding: 6px 14px;
           border-radius: 8px;
           border: 1px solid #e2e8f0;
           background: #f8fafc;
