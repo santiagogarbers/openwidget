@@ -409,31 +409,31 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
                 <ChatsListIcon />
               </button>
 
-              {/* LEFT: brand avatar + name + status */}
+              {/* LEFT: brand avatar + name + attended-by */}
               <div
-                style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0, cursor: 'pointer' }}
+                style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, minWidth: 0, cursor: 'pointer' }}
                 onClick={() => setInfoOpen(o => !o)}
               >
                 <PanelAvatar size={isMobile ? 54 : 40} logoUrl={config.clientLogo ?? null} />
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 15, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{config.botName}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 2 }}>
-                    {!isHistoryView && <span style={{ width: 6, height: 6, borderRadius: '50%', flexShrink: 0, background: isTransferring ? '#f59e0b' : '#22c55e' }} />}
-                    <span style={{ fontSize: 11, color: isHistoryView ? '#9ca3af' : '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3 }}>
+                    <span style={{
+                      width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
+                      background: isHistoryView ? '#d1d5db' : isTransferring ? '#f59e0b' : '#22c55e',
+                    }} />
+                    <span style={{ fontSize: 12, color: '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {isHistoryView
                         ? 'Sesión cerrada'
                         : isTransferring
                           ? 'Conectando con un agente...'
                           : isAgent
-                            ? 'Centro de atención · < 3 mins'
-                            : subtitle}
+                            ? `Atendido por ${agentSession.name}`
+                            : `Atendido por Asistente IA`}
                     </span>
                   </div>
                 </div>
               </div>
-
-              {/* RIGHT: attended-by pill */}
-              {!isHistoryView && <DWAttendedByPill isAgent={isAgent} agentSession={agentSession} isTransferring={isTransferring} clientLogo={config.clientLogo ?? null} />}
 
               <button className="dw-hdr-btn" aria-label="Cerrar" onClick={onClose}>
                 <CloseIcon />
