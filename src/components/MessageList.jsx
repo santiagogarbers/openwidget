@@ -320,7 +320,7 @@ const MENU_ICONS = {
 
 function MenuMessage({ message, onSelect }) {
   return (
-    <div className="cw-msg-in" style={{ maxWidth: '55%', paddingBottom: 8 }}>
+    <div className="cw-msg-in" style={{ maxWidth: '42%', paddingBottom: 8 }}>
       {message.title && (
         <div style={{ fontSize: 13, fontWeight: 600, color: '#111827', marginBottom: 10, paddingLeft: 2 }}>
           {message.title}
