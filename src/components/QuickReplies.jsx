@@ -41,5 +41,5 @@ const wrapStyle = {
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: 6,
-  padding: '6px 0 14px',
+  padding: '12px 0 14px',
 }
