@@ -441,16 +441,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
             </div>
           </div>
 
-          {/* Login screen — shown when not authenticated */}
-          {!loggedInUser && (
-            <LoginContent
-              client={{ name: clientName ?? config.botName, logo: clientLogo ?? config.clientLogo ?? null, primaryColor: config.primaryColor }}
-              onLogin={onLogin}
-            />
-          )}
-
-          {/* Messages + Input + Calls — only when authenticated */}
-          {loggedInUser && (<>
+          {/* Messages */}
           <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', ...WA_BG_STYLE, position: 'relative' }}>
             <MessageList
               messages={displayMessages}
@@ -555,7 +546,30 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
               />
             </div>
           )}
-          </>)}
+
+          {/* Login overlay — shown when not authenticated */}
+          {!loggedInUser && (
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 50,
+              background: 'rgba(15,23,42,0.45)',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              padding: 20,
+            }}>
+              <div style={{
+                background: '#fff', borderRadius: 20,
+                width: '100%', maxWidth: 360,
+                boxShadow: '0 24px 64px rgba(0,0,0,0.25)',
+                overflow: 'hidden',
+              }}>
+                <LoginContent
+                  client={{ name: clientName ?? config.botName, logo: clientLogo ?? config.clientLogo ?? null, primaryColor: config.primaryColor }}
+                  onLogin={onLogin}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* ── Info panel ── */}
