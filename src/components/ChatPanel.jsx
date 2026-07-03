@@ -172,32 +172,39 @@ function PanelHeader({ config, agentSession, isExpanded, onToggleExpand, onClose
           <HistoryIcon />
         </button>
 
-        {/* LEFT: brand avatar + name + status */}
+        {/* LEFT: brand avatar + name + attended-by */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 0 }}>
           <BrandAvatar size={38} logoUrl={config.clientLogo ?? null} />
           <div style={{ minWidth: 0, flex: 1 }}>
-            <div style={{ fontWeight: 700, fontSize: 14, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {config.botName}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
+              <span style={{ fontWeight: 700, fontSize: 14, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {(config.botName ?? '').replace(/^Asistente\s+/i, '') || config.botName}
+              </span>
+              <img src="/verified.png" alt="Verificado" style={{ width: 14, height: 14, flexShrink: 0 }} />
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 2 }}>
-              {!isClosed && (
-                <span style={{ width: 6, height: 6, borderRadius: '50%', flexShrink: 0, background: isTransferring ? '#f59e0b' : '#22c55e' }} />
-              )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3 }}>
+              {!isClosed && !isTransferring && isAgent && agentSession.avatar
+                ? <img src={agentSession.avatar} alt={agentSession.name} style={{ width: 14, height: 14, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, border: '1px solid #e5e7eb' }} />
+                : !isClosed && !isTransferring && !isAgent
+                  ? <span style={{ width: 14, height: 14, borderRadius: '50%', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="#7c3aed"/>
+                      </svg>
+                    </span>
+                  : <span style={{ width: 6, height: 6, borderRadius: '50%', flexShrink: 0, background: isClosed ? '#d1d5db' : '#f59e0b', marginLeft: 1 }} />
+              }
               <span style={{ fontSize: 11, color: '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {isClosed
                   ? 'Sesión cerrada'
                   : isTransferring
                     ? 'Conectando con un agente...'
                     : isAgent
-                      ? 'Centro de atención · < 3 mins'
-                      : (config.botSubtitle ?? 'Centro de atención')}
+                      ? `Atendido por ${agentSession.name}`
+                      : 'Atendido por Asistente IA'}
               </span>
             </div>
           </div>
         </div>
-
-        {/* RIGHT: attended-by pill */}
-        {!isClosed && <AttendedByPill isAgent={isAgent} agentSession={agentSession} isTransferring={isTransferring} clientLogo={config.clientLogo ?? null} />}
 
         {/* action buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
