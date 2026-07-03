@@ -418,10 +418,17 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 15, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{config.botName}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3 }}>
-                    <span style={{
-                      width: 7, height: 7, borderRadius: '50%', flexShrink: 0,
-                      background: isHistoryView ? '#d1d5db' : isTransferring ? '#f59e0b' : '#22c55e',
-                    }} />
+                    {/* Mini avatar: agent photo, AI icon, or dot */}
+                    {!isHistoryView && !isTransferring && isAgent && agentSession.avatar
+                      ? <img src={agentSession.avatar} alt={agentSession.name} style={{ width: 16, height: 16, borderRadius: '50%', objectFit: 'cover', flexShrink: 0, border: '1.5px solid #e5e7eb' }} />
+                      : !isHistoryView && !isTransferring && !isAgent
+                        ? <span style={{ width: 16, height: 16, borderRadius: '50%', background: '#ede9fe', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" fill="#7c3aed"/>
+                            </svg>
+                          </span>
+                        : <span style={{ width: 7, height: 7, borderRadius: '50%', flexShrink: 0, background: isHistoryView ? '#d1d5db' : '#f59e0b', marginLeft: 2, marginRight: 3 }} />
+                    }
                     <span style={{ fontSize: 12, color: '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {isHistoryView
                         ? 'Sesión cerrada'
