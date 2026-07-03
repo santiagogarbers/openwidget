@@ -184,7 +184,7 @@ function AudioMessage({ message, isRead, isMobile }) {
         <div style={{
           overflow: 'hidden',
           padding: isMobile ? '10px 14px 8px' : '8px 12px 6px',
-          borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+          borderRadius: isUser ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
           background: isUser ? 'var(--cw-bg-message-user)' : 'var(--cw-bg-message-bot)',
           minWidth: 185,
           boxShadow: '0 1px 2px rgba(0,0,0,0.08)',
@@ -589,7 +589,7 @@ const bubbleStyle = (isUser, isMobile = false) => ({
   position: 'relative',
   overflow: 'hidden',
   padding: isMobile ? '9px 16px 22px' : '7px 13px 20px',
-  borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+  borderRadius: isUser ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
   background: isUser ? 'var(--cw-bg-message-user)' : 'var(--cw-bg-message-bot)',
   color: isUser ? 'var(--cw-text-message-user)' : 'var(--cw-text)',
   fontSize: 14,
