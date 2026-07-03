@@ -243,8 +243,7 @@ function Message({ message, isRead, onOpenLightbox, quickReplies, onQuickReply, 
   if (message.type === 'fallback') {
     return (
       <div className="cw-msg-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
-        <FallbackMessage text={fallbackText} onEscalate={onEscalate} onLeaveMessage={onLeaveMessage} acted={message.acted} isMobile={isMobile} />
-        {senderName && <BubbleLabel name={senderName} type={senderType} />}
+        <FallbackMessage text={fallbackText} onEscalate={onEscalate} onLeaveMessage={onLeaveMessage} acted={message.acted} isMobile={isMobile} senderName={senderName} senderType={senderType} />
       </div>
     )
   }
