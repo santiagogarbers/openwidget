@@ -3,23 +3,22 @@ export function QuickReplies({ options, onSelect }) {
     <>
       <style>{`
         .cw-qr-btn {
-          padding: 6px 14px;
-          border-radius: 999px;
+          padding: 9px 16px;
+          border-radius: 8px;
           border: 1px solid #e2e8f0;
-          background: #fff;
+          background: #f8fafc;
           color: #374151;
           font-family: var(--cw-font-family);
           font-size: 13px;
           font-weight: 500;
           cursor: pointer;
-          transition: border-color 150ms, background 150ms, color 150ms;
+          transition: border-color 150ms, background 150ms;
           white-space: nowrap;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+          text-align: left;
         }
         .cw-qr-btn:hover {
-          border-color: var(--cw-primary);
-          color: var(--cw-primary);
-          background: #fff;
+          background: #f1f5f9;
+          border-color: #cbd5e1;
         }
       `}</style>
       <div style={wrapStyle}>
@@ -39,8 +38,7 @@ export function QuickReplies({ options, onSelect }) {
 
 const wrapStyle = {
   display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  flexDirection: 'column',
   alignItems: 'flex-start',
   gap: 6,
   padding: '6px 0 14px',
