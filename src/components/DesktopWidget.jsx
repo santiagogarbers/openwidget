@@ -417,7 +417,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
                 <PanelAvatar size={isMobile ? 54 : 40} logoUrl={config.clientLogo ?? null} />
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, minWidth: 0 }}>
-                    <span style={{ fontWeight: 700, fontSize: 15, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{config.botName}</span>
+                    <span style={{ fontWeight: 700, fontSize: 15, color: '#111827', lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{clientName ?? config.botName}</span>
                     <img src="/verified.png" alt="Verificado" style={{ width: 16, height: 16, flexShrink: 0 }} />
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 3 }}>
