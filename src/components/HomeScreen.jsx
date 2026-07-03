@@ -385,6 +385,28 @@ function RecentMessage({ session, onSelect, clientLogo = null }) {
         </div>
         <span style={recentDotStyle} />
       </div>
+      <div style={{ width: '100%', height: 1, background: '#f3f4f6', margin: '12px 0' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {AGENT_AVATARS.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt=""
+              style={{
+                width: 24, height: 24, borderRadius: '50%',
+                border: '2px solid #fff',
+                objectFit: 'cover',
+                marginLeft: i === 0 ? 0 : -7,
+                position: 'relative',
+                zIndex: AGENT_AVATARS.length - i,
+                display: 'block',
+              }}
+            />
+          ))}
+        </div>
+        <span style={{ fontSize: 13, color: '#6b7280' }}>Agentes disponibles para atención</span>
+      </div>
     </button>
   )
 }
