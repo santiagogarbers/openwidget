@@ -50,7 +50,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
   const [typingStates, setTypingStates] = useState(null)
   const [agentSession, setAgentSession] = useState(null)
   const [voiceMode, setVoiceMode]     = useState(false)
-  const [sessionsOpen, setSessionsOpen]   = useState(false)
+  const [sessionsOpen, setSessionsOpen]   = useState(true)
   const [selectedSession, setSelectedSession] = useState(null)
   const [infoOpen, setInfoOpen]           = useState(() => window.innerWidth >= 768)
   const [incomingCall, setIncomingCall]   = useState(null)
