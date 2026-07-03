@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { DesktopWidget } from './components/DesktopWidget'
 import { ChatWidget } from './components/ChatWidget'
 import { LandingPage } from './components/LandingPage'
+import { IntegrationsPage } from './components/IntegrationsPage'
 import { LoginContent } from './components/LoginContent'
 import { CLIENTS } from './config/clients'
 
@@ -403,13 +404,16 @@ function App() {
     <>
       {view === 'landing' && (
         <>
-          <LandingPage onSelectClient={handleSelectClient} loggedInUser={loggedInUser} onLogout={handleLogout} onOpenProfile={() => setProfileOpen(true)} onOpenLogin={() => setLoginOpen(true)} />
+          <LandingPage onSelectClient={handleSelectClient} loggedInUser={loggedInUser} onLogout={handleLogout} onOpenProfile={() => setProfileOpen(true)} onOpenLogin={() => setLoginOpen(true)} onNavigate={setView} />
           <ChatWidget
             key={widgetKey}
             config={widgetConfig}
             clientSelector={clientSelector}
           />
         </>
+      )}
+      {view === 'integrations' && (
+        <IntegrationsPage onBack={() => setView('landing')} />
       )}
       {showDesktop && (
         <DesktopWidget
