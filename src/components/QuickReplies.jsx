@@ -6,8 +6,8 @@ export function QuickReplies({ options, onSelect }) {
           padding: 6px 14px;
           border-radius: 8px;
           border: 1px solid #e2e8f0;
-          background: #f8fafc;
-          color: #374151;
+          background: #ffffff;
+          color: #111827;
           font-family: var(--cw-font-family);
           font-size: 13px;
           font-weight: 500;
