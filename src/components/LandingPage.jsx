@@ -650,13 +650,12 @@ function UserPill({ user, onLogout, onOpenProfile, isMobile }) {
   )
 }
 
-export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProfile, onOpenLogin }) {
+export function LandingPage({ onSelectClient, onNavigate, loggedInUser, onLogout, onOpenProfile, onOpenLogin }) {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('Todos')
   const [scrolled, setScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640)
   const companiesRef = useRef(null)
-  const integrationRef = useRef(null)
   const cardsInView = useInView(companiesRef)
 
   useEffect(() => {
@@ -818,11 +817,11 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
               }}
                 onMouseEnter={e => e.currentTarget.style.background = '#d97706'}
                 onMouseLeave={e => e.currentTarget.style.background = '#f59e0b'}
-                onClick={() => integrationRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => onNavigate?.('integrations')}
               >Quiero ser parte</button>
             )}
             {isMobile && (
-              <button onClick={() => integrationRef.current?.scrollIntoView({ behavior: 'smooth' })} style={{
+              <button onClick={() => onNavigate?.('integrations')} style={{
                 background: '#f59e0b', color: '#0f172a',
                 border: 'none', borderRadius: 10,
                 padding: '7px 14px',
@@ -886,7 +885,7 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
                 </svg>
               </button>
               <button
-                onClick={() => integrationRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => onNavigate?.('integrations')}
                 style={{
                 background: '#fff', color: '#0f172a',
                 border: '1.5px solid #e2e8f0', borderRadius: 12,
@@ -1054,117 +1053,6 @@ export function LandingPage({ onSelectClient, loggedInUser, onLogout, onOpenProf
             </div>
           </div>
         )}
-      </section>
-
-      {/* ── INTEGRATION SECTION ── */}
-      <section ref={integrationRef} style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: isMobile ? '52px 20px 60px' : '72px 32px 80px' }}>
-        <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-          {/* Header */}
-          <div style={{ marginBottom: 48, textAlign: isMobile ? 'center' : 'left', maxWidth: 560 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 999, padding: '4px 12px', marginBottom: 14 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#16a34a' }}>Integración disponible</span>
-            </div>
-            <h2 style={{ fontSize: isMobile ? 26 : 34, fontWeight: 800, color: '#0f172a', margin: '0 0 12px', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              Integrá OpenCentral con<br />tu plataforma actual
-            </h2>
-            <p style={{ fontSize: 16, color: '#64748b', margin: 0, lineHeight: 1.6 }}>
-              Conectamos con las principales soluciones de CRM y atención al cliente del mercado.
-            </p>
-          </div>
-
-          {/* Cards grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20, marginBottom: 56 }}>
-            {/* Botmaker card */}
-            <div style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%)', border: '1.5px solid #bfdbfe', borderRadius: 20, padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 8px rgba(59,130,246,0.12)' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#3b82f6" stroke="#3b82f6" strokeWidth="1" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#3b82f6', background: '#dbeafe', padding: '3px 10px', borderRadius: 999 }}>Integración en 2 clicks</span>
-              </div>
-              <div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 8px' }}>Soy cliente de Botmaker</h3>
-                <p style={{ fontSize: 14, color: '#475569', margin: 0, lineHeight: 1.6 }}>
-                  OpenCentral ya está disponible como integración nativa dentro de la plataforma. Activalo desde tu cuenta sin tocar código.
-                </p>
-              </div>
-              <div style={{ marginTop: 'auto', paddingTop: 8 }}>
-                <a href="https://botmaker.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: '#2563eb', textDecoration: 'none' }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#1d4ed8'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#2563eb'}
-                >
-                  Ir a Botmaker
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Other platforms card */}
-            <div style={{ background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: 20, padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {/* Platform logos */}
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                {[
-                  { name: 'Zendesk', color: '#03363d', letter: 'Z' },
-                  { name: 'Salesforce', color: '#00a1e0', letter: 'S' },
-                  { name: 'Genesys', color: '#ff4f1f', letter: 'G' },
-                  { name: 'Freshdesk', color: '#28a745', letter: 'F' },
-                  { name: 'Intercom', color: '#1f8ded', letter: 'I' },
-                  { name: 'Clientgo', color: '#7c3aed', letter: 'C' },
-                ].map(p => (
-                  <div key={p.name} title={p.name} style={{ width: 32, height: 32, borderRadius: 8, background: p.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ color: '#fff', fontWeight: 800, fontSize: 13 }}>{p.letter}</span>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 8px' }}>Uso otra plataforma</h3>
-                <p style={{ fontSize: 14, color: '#475569', margin: '0 0 14px', lineHeight: 1.6 }}>
-                  Compatible con Zendesk, Genesys, Clientgo, Salesforce, Freshdesk, Intercom y más. Anotate en la whitelist y te contactamos.
-                </p>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {['Zendesk', 'Genesys', 'Clientgo', 'Salesforce', 'Freshdesk', '+más'].map(tag => (
-                    <span key={tag} style={{ fontSize: 12, fontWeight: 500, color: '#475569', background: '#f1f5f9', border: '1px solid #e2e8f0', borderRadius: 6, padding: '3px 8px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div style={{ marginTop: 'auto', paddingTop: 8 }}>
-                <button
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 700, color: '#0f172a', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                >
-                  Unirme a la whitelist
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* How it works steps */}
-          <div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', margin: '0 0 24px', textAlign: isMobile ? 'center' : 'left' }}>Cómo funciona</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 20 : 32 }}>
-              {[
-                { n: '1', title: 'Elegís tu plataforma', desc: 'Botmaker nativo o conectamos vía API con tu CRM actual en minutos.' },
-                { n: '2', title: 'Configurás el widget', desc: 'Personalizás colores, logo y mensajes de bienvenida para cada empresa.' },
-                { n: '3', title: 'Recibís consultas', desc: 'Tus clientes te escriben desde OpenWidget y vos respondés desde tu plataforma habitual.' },
-              ].map(step => (
-                <div key={step.n} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 10, background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>{step.n}</span>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{step.title}</div>
-                    <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>{step.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ── COMPANIES SECTION ── */}
