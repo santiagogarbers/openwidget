@@ -1,10 +1,15 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { CLIENTS, CATEGORIES } from '../config/clients'
 import { BotmakerLogo } from './BotmakerLogo'
+import { useRecentClients, timeAgo } from '../hooks/useRecentClients'
 
 function hexToRgb(hex) {
   const n = parseInt(hex.replace('#', ''), 16)
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+}
+
+function interpolate(text, variables = {}) {
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => variables[key] ?? '')
 }
 
 function ClientLogo({ name, logo, color }) {
@@ -100,6 +105,80 @@ function ClientCard({ client, onSelect, animStyle }) {
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MiniAvatar({ name, logo, color, size = 30 }) {
+  const [failed, setFailed] = useState(false)
+  const initials = name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase()
+
+  if (logo && !failed) {
+    return (
+      <img
+        src={logo}
+        alt={name}
+        onError={() => setFailed(true)}
+        style={{
+          width: size, height: size, borderRadius: '50%',
+          objectFit: 'contain', background: '#fff',
+          border: '1px solid #f1f5f9', padding: 3, boxSizing: 'border-box',
+          flexShrink: 0,
+        }}
+      />
+    )
+  }
+
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: '50%', background: color,
+      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+    }}>
+      <span style={{ fontSize: size * 0.38, fontWeight: 800, color: '#fff' }}>{initials}</span>
+    </div>
+  )
+}
+
+function RecentClientCard({ client, onSelect, userName }) {
+  const [hovered, setHovered] = useState(false)
+  const rawMessage = interpolate(client.config?.welcomeMessage || client.tagline || '', { nombre: userName })
+  const lastMessage = rawMessage.length > 30 ? `${rawMessage.slice(0, 30).trimEnd()}…` : rawMessage
+
+  return (
+    <div
+      onClick={() => onSelect(client)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        flex: '0 0 240px', scrollSnapAlign: 'start',
+        background: '#fff',
+        border: `1.5px solid ${hovered ? client.primaryColor : '#e5e7eb'}`,
+        borderRadius: 12, padding: '10px 12px',
+        cursor: 'pointer',
+        transition: 'border-color 160ms, box-shadow 160ms, transform 160ms',
+        boxShadow: hovered ? '0 6px 18px rgba(15,23,42,0.1)' : '0 1px 3px rgba(0,0,0,0.04)',
+        display: 'flex', alignItems: 'center', gap: 10,
+      }}
+    >
+      <MiniAvatar name={client.name} logo={client.logo} color={client.primaryColor} size={38} />
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 6 }}>
+          <span style={{ fontSize: 13.5, fontWeight: 700, color: '#0f172a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {client.name}
+          </span>
+          <span style={{ fontSize: 10.5, color: '#94a3b8', whiteSpace: 'nowrap', flexShrink: 0 }}>
+            {timeAgo(client.lastChatAt)}
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, minWidth: 0 }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, color: '#94a3b8' }}>
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span style={{ fontSize: 12.5, color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {lastMessage}
+          </span>
         </div>
       </div>
     </div>
@@ -657,6 +736,7 @@ export function LandingPage({ onSelectClient, onNavigate, loggedInUser, onLogout
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640)
   const companiesRef = useRef(null)
   const cardsInView = useInView(companiesRef)
+  const recentClients = useRecentClients()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -729,6 +809,8 @@ export function LandingPage({ onSelectClient, onNavigate, loggedInUser, onLogout
           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
           gap: 16px;
         }
+        .lp-recent-row { scrollbar-width: none; }
+        .lp-recent-row::-webkit-scrollbar { display: none; }
         .lp-chip {
           padding: 6px 14px; border-radius: 99px; font-size: 12.5px;
           font-weight: 500; border: 1.5px solid #e2e8f0;
@@ -817,11 +899,11 @@ export function LandingPage({ onSelectClient, onNavigate, loggedInUser, onLogout
               }}
                 onMouseEnter={e => e.currentTarget.style.background = '#d97706'}
                 onMouseLeave={e => e.currentTarget.style.background = '#f59e0b'}
-                onClick={() => onNavigate?.('integrations')}
+                onClick={() => onNavigate?.('open-central')}
               >Quiero ser parte</button>
             )}
             {isMobile && (
-              <button onClick={() => onNavigate?.('integrations')} style={{
+              <button onClick={() => onNavigate?.('open-central')} style={{
                 background: '#f59e0b', color: '#0f172a',
                 border: 'none', borderRadius: 10,
                 padding: '7px 14px',
@@ -1054,6 +1136,34 @@ export function LandingPage({ onSelectClient, onNavigate, loggedInUser, onLogout
           </div>
         )}
       </section>
+
+      {/* ── RECENTLY VIEWED ── */}
+      {loggedInUser && recentClients.length > 0 && (
+        <section style={{ padding: isMobile ? '28px 20px 0' : '36px 32px 0', animation: `lp-fade-up 0.55s ${EASING} both` }}>
+          <div style={{
+            maxWidth: 1440, margin: '0 auto',
+            background: '#f1f5f9', borderRadius: 20,
+            padding: isMobile ? '20px 16px' : '26px 28px',
+          }}>
+            <div style={{ marginBottom: 16 }}>
+              <h2 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>
+                Sesiones recientes
+              </h2>
+              <p style={{ fontSize: 13.5, color: '#64748b', margin: 0 }}>
+                Retomá la conversación donde la dejaste.
+              </p>
+            </div>
+            <div className="lp-recent-row" style={{
+              display: 'flex', gap: 14, overflowX: 'auto', paddingBottom: 6,
+              scrollSnapType: 'x proximity',
+            }}>
+              {recentClients.map(client => (
+                <RecentClientCard key={client.id} client={client} onSelect={onSelectClient} userName={(loggedInUser?.name || '').split(' ')[0] || 'Santiago'} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── COMPANIES SECTION ── */}
       <div ref={companiesRef} style={{ maxWidth: 1440, margin: '0 auto', padding: '52px 32px 80px' }}>

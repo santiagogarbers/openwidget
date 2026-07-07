@@ -5,8 +5,10 @@ import { DesktopWidget } from './components/DesktopWidget'
 import { ChatWidget } from './components/ChatWidget'
 import { LandingPage } from './components/LandingPage'
 import { IntegrationsPage } from './components/IntegrationsPage'
+import { OpenCentralPage } from './components/OpenCentralPage'
 import { LoginContent } from './components/LoginContent'
 import { CLIENTS } from './config/clients'
+import { recordRecentClient } from './hooks/useRecentClients'
 
 const FONT = '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif'
 
@@ -365,6 +367,7 @@ function App() {
   const [widgetKey, setWidgetKey] = useState(0)
 
   const handleSelectClient = (client) => {
+    recordRecentClient(client.id)
     setActiveClient(client)
     setView('loading')
     setTimeout(() => {
@@ -414,6 +417,9 @@ function App() {
       )}
       {view === 'integrations' && (
         <IntegrationsPage onBack={() => setView('landing')} />
+      )}
+      {view === 'open-central' && (
+        <OpenCentralPage onBack={() => setView('landing')} />
       )}
       {showDesktop && (
         <DesktopWidget
