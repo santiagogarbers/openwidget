@@ -73,6 +73,7 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
     window.addEventListener('resize', handler)
     return () => window.removeEventListener('resize', handler)
   }, [])
+  const [showAppStrip, setShowAppStrip] = useState(true)
 
   // Apply theme CSS variables (same as ChatWidget)
   useEffect(() => {
@@ -415,6 +416,10 @@ export function DesktopWidget({ onClose, config: configOverrides = {}, clientNam
             .dw-resize-handle:hover::after { background: #bfdbfe; }
             .dw-resize-handle.active::after { background: #2563eb; }
           `}</style>
+
+          {isMobile && showAppStrip && (
+            <AppDownloadStrip onDismiss={() => setShowAppStrip(false)} />
+          )}
 
           {/* Header */}
           <div style={{ ...headerStyle, background: (() => { const [r,g,b] = hexToRgb(config.primaryColor); return `linear-gradient(180deg, rgba(${r},${g},${b},0.07) 0%, #ffffff 100%)` })() }}>
@@ -931,6 +936,71 @@ function ChatsListIcon() {
   )
 }
 
+function AppDownloadStrip({ onDismiss }) {
+  return (
+    <div style={appStripStyle}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7, minWidth: 0 }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+          <AppleGlyph />
+          <PlayGlyph />
+        </span>
+        <span style={{ fontSize: 11.5, color: '#64748b', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'var(--cw-font-family)' }}>
+          Seguí este chat desde la app
+        </span>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+        <a
+          href="https://apps.apple.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={appStripLinkStyle}
+        >
+          Abrir app
+        </a>
+        <button className="dw-hdr-btn" aria-label="Cerrar aviso" onClick={onDismiss} style={{ width: 22, height: 22 }}>
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function AppleGlyph() {
+  return (
+    <svg width="12" height="14" viewBox="0 0 20 24" fill="none">
+      <path d="M16.462 12.748c-.028-3.22 2.634-4.773 2.754-4.847-1.503-2.195-3.836-2.494-4.662-2.524-1.977-.2-3.872 1.17-4.875 1.17-1.003 0-2.544-1.143-4.189-1.113-2.148.033-4.14 1.254-5.244 3.17C-1.93 12.57.532 18.39 2.9 21.56c1.176 1.683 2.573 3.57 4.404 3.503 1.78-.072 2.447-1.142 4.593-1.142 2.147 0 2.764 1.142 4.642 1.107 1.907-.033 3.114-1.703 4.273-3.398 1.369-1.942 1.921-3.854 1.946-3.953-.043-.017-3.715-1.427-3.75-5.67l-.546.74z" fill="#64748b"/>
+      <path d="M13.178 3.967C14.13 2.81 14.78 1.22 14.597 0c-1.533.063-3.42 1.026-4.406 2.154-.956 1.097-1.8 2.882-1.575 4.553 1.716.132 3.48-.876 4.562-2.74z" fill="#64748b"/>
+    </svg>
+  )
+}
+
+function PlayGlyph() {
+  return (
+    <svg width="12" height="13" viewBox="0 0 20 22" fill="none">
+      <path d="M1.215.366C.898.7.71 1.21.71 1.87v18.26c0 .66.188 1.17.505 1.504l.08.077 10.23-10.23v-.24L1.295.289l-.08.077z" fill="url(#dw-gp1)"/>
+      <path d="M14.94 14.82l-3.41-3.41v-.24l3.41-3.41.077.044 4.04 2.295c1.154.655 1.154 1.727 0 2.382l-4.04 2.295-.077.044z" fill="url(#dw-gp2)"/>
+      <path d="M15.017 14.776L11.53 11.29.71 22.11c.38.402.998.452 1.698.05l12.609-7.384z" fill="url(#dw-gp3)"/>
+      <path d="M15.017 7.804L2.408.42C1.708.018 1.09.068.71.47l10.82 10.82 3.487-3.487z" fill="url(#dw-gp4)"/>
+      <defs>
+        <linearGradient id="dw-gp1" x1="10.83" y1="1.57" x2="-3.9" y2="16.3" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#00A0FF"/><stop offset="1" stopColor="#00AEFF"/>
+        </linearGradient>
+        <linearGradient id="dw-gp2" x1="20.3" y1="11.29" x2="10.26" y2="11.29" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFD800"/><stop offset="1" stopColor="#FF8A00"/>
+        </linearGradient>
+        <linearGradient id="dw-gp3" x1="12.86" y1="13.59" x2="-1.34" y2="27.79" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FF3A44"/><stop offset="1" stopColor="#C31162"/>
+        </linearGradient>
+        <linearGradient id="dw-gp4" x1="-1.69" y1="-2.54" x2="5.41" y2="4.56" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#32A071"/><stop offset="1" stopColor="#2DA771"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  )
+}
+
 function DWInfoPanel({ onClose, name, avatar, isAgent, subtitle, messages, config, isMobile = false }) {
   const sharedImages = messages.filter(m => m.attachments?.length > 0).flatMap(m => m.attachments)
   const role         = isAgent ? 'Agente humano' : 'Asistente IA'
@@ -1339,6 +1409,25 @@ const headerStyle = {
   borderBottom: '1px solid #f3f4f6',
   padding: '12px 14px',
   flexShrink: 0,
+}
+
+const appStripStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: 8,
+  padding: '6px 14px',
+  background: '#f8fafc',
+  borderBottom: '1px solid #f1f5f9',
+  flexShrink: 0,
+}
+const appStripLinkStyle = {
+  fontSize: 11.5,
+  fontWeight: 700,
+  color: 'var(--cw-primary)',
+  textDecoration: 'none',
+  whiteSpace: 'nowrap',
+  fontFamily: 'var(--cw-font-family)',
 }
 
 function darken(hex) {
